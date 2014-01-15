@@ -1,0 +1,55 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="/layout/template.xhtml"
+	xmlns:c="http://java.sun.com/jstl/core">
+
+<ui:define name="body">
+
+<div class="container">
+<div class="row row-offcanvas row-offcanvas-right">
+<div class="col-xs-12 col-sm-9">
+ 
+
+   <h1 class="text-center">#{menuHome.getMenuById(selectedMenuValues.level).name}</h1>
+   <div class="row">
+   <c:forEach items="#{lessonsList.resultList}" var="lesson"> 
+			<div class="col-xs-6">
+				<h2>#{lesson.name}</h2>
+				<p> mmDonec id elit non mi porta gravida at eget metus. Fusce
+					dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+					ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
+					magna mollis euismod. Donec sed odio dui.</p>
+				
+				<c:forEach items="#{lesson.menus}" var="content"> 
+				
+						<s:link styleClass="btn btn-default" view="/lessonsContent.xhtml"><span class="glyphicon glyphicon-home"></span>
+						#{content.name}
+						<f:param name="lesson" value="#{lesson.id}"/>
+						<f:param name="content" value="#{content.id}"/>
+						</s:link>
+						
+					
+				
+				</c:forEach>
+				
+			</div>
+</c:forEach>
+		</div>
+   
+   
+</div>
+<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+	<ui:include src="layout/leftMenu.xhtml" />	
+</div>
+</div>
+</div>
+
+
+	</ui:define>
+</ui:composition>

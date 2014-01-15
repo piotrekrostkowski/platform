@@ -1,0 +1,118 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="/layout/template.xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<ui:define name="body">
+ 
+<ice:form rendered="#{selectedAnswer.init()}">
+<div class="fuelux">
+
+<div class="container">
+
+<center>
+<div class="well">
+
+
+<c:set var="idCount" value="1" />
+
+<div class="wizard" id="MyWizard">
+<ul class="steps">
+
+
+<c:forEach items="#{exercisesList.resultList}" var="exercise">
+
+<c:if test="#{idCount==1}">
+<li class="active" data-target="#{fn:join('#step',idCount)}"><span class="badge badge-info">#{idCount}</span>#{fn:join('Step',idCount)}<span class="chevron"></span>
+</li>
+</c:if>
+
+<c:if test="#{idCount!=1}">
+<li data-target="#{fn:join('#step',idCount)}"><span class="badge">#{idCount}</span>#{fn:join('Step',idCount)}<span class="chevron"></span>
+</li>
+</c:if>
+
+<c:set var="idCount" value="#{idCount+1}" />
+
+</c:forEach>
+<li data-target="#{fn:join('#step',idCount)}"><span class="badge">#{idCount}</span>Wynik<span class="chevron"></span>
+</li>
+</ul>
+   <div class="actions">
+   	<button type="button" class="btn btn-mini btn-prev"> <i class="icon-arrow-left"></i>Powrót</button>
+<button type="button" class="btn btn-mini btn-next" data-last="Finish">Dalej<i class="icon-arrow-right"></i></button>
+            
+        </div>
+</div>
+
+<c:set var="idCountx" value="1" />
+<div class="step-content">
+<c:forEach items="#{exercisesList.resultList}" var="exercise">
+    <div class="#{idCountx eq 1 ? 'step-pane active' : 'step-pane'}" id="#{fn:join('step',idCountx)}">
+	<h3>
+
+    <c:choose>
+	<c:when test="#{exercise.excercisesType.component eq 'selectOneMenu'}">
+	
+	<c:set var="splittedQuestion" value="#{fn:split(exercise.questions.value, ' ')}" />
+	
+	 	<c:forEach var="word" items="#{splittedQuestion}">
+	 	<c:if test="#{fn:contains(word, 'wyraz')}">
+	
+	 	<ice:selectOneMenu value="#{selectedAnswer.answers[idCountx]}" partialSubmit="true"  valueChangeListener="#{selectedAnswer.change}"> 
+		<s:selectItems value="#{exercise.answers}" var="answer" 
+                  label="#{answer.value}"
+                  itemValue="#{answer}"
+                  hideNoSelectionLabel="false"
+                  noSelectionLabel="Wybierz"
+                  />   
+                 <s:convertEntity/>
+		</ice:selectOneMenu>
+
+	 	</c:if>
+	 	<c:if test="#{!fn:contains(word, 'wyraz')}">
+	 	<h:outputText value="#{word}"/>
+	 	</c:if>
+		</c:forEach> 
+	</c:when>
+	<c:when test="#{exercise.excercisesType.component eq 'selectOneRadio'}">
+	<h:outputText value="#{exercise.questions.value}" />
+	<br/>
+	
+	<ice:selectOneRadio partialSubmit="true" value="#{selectedAnswer.answers}">
+	<s:selectItems value="#{exercise.answers}" var="answer" hideNoSelectionLabel="true"
+	 			label="#{answer.value}" itemValue="#{answer}"/>
+	<s:convertEntity/>
+	</ice:selectOneRadio>
+	</c:when>
+	</c:choose>
+	</h3>	 	
+	</div>
+	
+<c:set var="idCountx" value="#{idCountx+1}" />
+</c:forEach>
+   <div class="#{idCountx eq 1 ? 'step-pane active' : 'step-pane'}" id="#{fn:join('step',idCountx)}">
+
+	<ice:outputText value="Ilosc poprawnych odpowiedzi : #{selectedAnswer.goodAnswersCount()}"/><br />
+	<ice:outputText value="Ilosc błędnych odpowiedzi : #{selectedAnswer.badAnswersCount()}"/>
+	
+   </div>
+   
+</div>
+</div>
+</center>
+
+
+
+</div>
+</div>
+</ice:form>
+	</ui:define>
+</ui:composition>

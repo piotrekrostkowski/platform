@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+<head>
+<ice:outputDeclaration doctypeRoot="HTML"
+	doctypePublic="-//W3C//DTD XHTML 1.0 Transitional//EN"
+	doctypeSystem="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>platform</title>
+
+<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/bootstrap.min.css" />
+<link rel="stylesheet" href="#{request.contextPath}/css/platform.css" type="text/css" />
+
+<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+<link href="http://fuelcdn.com/fuelux/2.3.1/css/fuelux.css" type="text/css" rel="stylesheet"/>
+<link href="http://fuelcdn.com/fuelux/2.3/css/fuelux-responsive.css" type="text/css" rel="stylesheet"/>
+<link href="http://www.bootply.com/bootply/themes/metroid/theme.css" type="text/css" rel="stylesheet"/>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+
+<!-- 
+<script type="text/javascript" src="http://fuelcdn.com/fuelux/2.3.1/loader.min.js"></script>
+
+ -->
+
+</head>
+<body style="padding-top: 70px;">
+<f:view>
+
+<div class="container">
+<ui:include src="menu.xhtml" />
+</div>
+
+<div class="container">
+
+		<ui:insert name="body" />
+
+</div>
+	<hr />
+
+</f:view>
+
+
+</body>
+
+
+
+</html>

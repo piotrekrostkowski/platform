@@ -1,0 +1,80 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:c="http://java.sun.com/jstl/core">
+
+	<nav class="navbar navbar-default navbar-fixed-top"
+		role="navigation">
+	<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+		
+	<s:link styleClass="navbar-brand" view="/home.xhtml" value="Interaktywna platforma nauki"/>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li class="active">
+						
+						<s:link view="/main.xhtml"><span class="glyphicon glyphicon-home"></span>
+						Start
+						</s:link>
+						
+				</li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>
+						Nauka<b class="caret"></b>
+				</a>
+					<ul class="dropdown-menu">
+					<c:forEach items="#{topMenuList.resultList}" var="menuItem">
+						<li>
+						<s:link view="/lessons.xhtml"><span class="glyphicon glyphicon-home"></span>
+						#{menuItem.name}
+						<f:param name="level" value="#{menuItem.id}"/>
+						</s:link>
+						</li>
+					</c:forEach>
+					</ul>
+				</li>
+			</ul>
+			<h:form class="navbar-form navbar-right">
+		
+				<div class="form-group">
+					<h:inputText value="" size="10" style="margin-right: 3px;"/>
+					<h:inputSecret value="" size="10" style="margin-right: 3px;"/>
+				</div>
+				<h:commandButton value="Zaloguj" class="btn btn-primary"/>
+			</h:form>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#"><span class="glyphicon glyphicon-asterisk"></span>
+						Book Tickets</a>
+				</li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown"><span
+						class="glyphicon glyphicon-info-sign"></span> Reservation<b
+						class="caret"></b>
+				</a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Cancel</a>
+						</li>
+						<li><a href="#">Confirm</a>
+						</li>
+					</ul></li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	</nav>
+
+</div>

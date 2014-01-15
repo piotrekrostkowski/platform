@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<project name="platform" default="copyWAR" basedir=".">
+
+  <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+  <classpath>
+    <pathelement location="E:\praca\programy\ant\lib\ant-contrib-0.6.jar"/>
+  </classpath>
+</taskdef>
+   
+    <!-- Give user a chance to override without editing this file or typing -D -->
+    <property file="${basedir}/build.properties"/>
+
+    <property name="profile" value="dev"/>
+    <property file="build-${profile}.properties"/>
+
+    <!-- set global properties for this build -->
+    <property name="project.name" value="platform"/>
+    <property name="project.ear" value="true"/>
+    <property name="icefaces.present" value="true"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="src.model.dir" value="src/main"/>
+    <property name="src.action.dir" value="src/hot"/>
+    <property name="src.test.dir" value="src/test"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="endorsed.dir" value="${lib.dir}/endorsed"/>
+    <property name="ear.dir" value="exploded-archives/${project.name}.ear"/>
+    <property name="exploded.archive.dir" value="${ear.dir}"/>
+    <property name="jar.dir" value="${ear.dir}/${project.name}_jar"/>
+    <property name="war.dir" value="${ear.dir}/${project.name}_war"/>
+    <property name="test.dir" value="test-build"/>
+    <property name="bootstrap.dir" value="${basedir}/bootstrap"/>
+    <property name="jboss.domain" value="default"/>
+    <property name="deploy.dir" value="${jboss.home}/server/${jboss.domain}/deploy"/>
+    <property name="ear.deploy.dir" value="${deploy.dir}/${project.name}.ear"/>
+    <property name="jar.deploy.dir" value="${ear.deploy.dir}/${project.name}.jar"/>
+    <property name="war.deploy.dir" value="${ear.deploy.dir}/${project.name}.war"/>
+    <property name="packaged.archive" value="${dist.dir}/${project.name}.ear"/>
+    <property name="testng.jar" value="${basedir}/lib/testng.jar"/>
+    <property name="javac.debug" value="true"/>
+    <property name="javac.deprecation" value="false"/>
+    <property name="debug" value="false"/>
+
+    <!--Properties for validating configuration files -->
+    <property name="validate.resources.dir" value="${basedir}/exploded-archives"/>
+    <property name="schema.dir" value="${basedir}/exploded-archives/schemas"/>
+    <property name="src.schema.dir" value="${schema.dir}/org/jboss/seam"/>
+    <property name="schema.version" value="2.1"/>
+
+    <fileset id="lib" dir="${lib.dir}">
+        <include name="*.jar"/>
+    </fileset>
+
+    <path id="build.classpath">
+        <fileset refid="lib"/>
+    </path>
+    
+
+   <target name="copyWAR" description="Copy directopty WAR to jboss TMP">
+<!-- 
+  		<path id="mypath">
+            <dirset dir="${jboss.home}/server/all/tmp/">
+            </dirset>
+        </path>
+
+        <timestampselector property="latest.modified"
+            pathref="mypath"
+            count="1"/>
+
+        <echo message="Kopiowanie danych z katalogu : " />
+        <echo message="${latest.modified}"/>
+        <echo message="Do katalogu : " />
+		<echo message="${jboss.home}\server\all\deploy\isolutions.ear\isolutions.war"/>
+	 -->
+	 
+	 	
+        <copy todir="E:\praca\programy\jboss-5.0.1.GA\server\${jboss.domain}\tmp\${jboss.session}\platform.ear\platform.war">
+            <fileset dir="E:\praca\projekty\workspace\platform\exploded-archives\platform.ear\platform_war"></fileset>
+        </copy>
+    </target>
+
+    
+
+</project>

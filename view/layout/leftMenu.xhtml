@@ -1,0 +1,22 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+
+<h:form>
+<div class="list-group">
+			<c:forEach items="#{lessonsList.resultList}" var="menuItem">
+						<div class="list-group-item">
+						<s:link view="/lessons.xhtml" includePageParams="true"><span class="glyphicon glyphicon-home"></span>
+						#{menuItem.name}
+						<f:param name="lesson" value="#{menuItem.id}"/>
+						</s:link>
+						</div>
+			</c:forEach>
+		</div>
+	</h:form>
+</div>
+

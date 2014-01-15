@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:c="http://java.sun.com/jstl/core">
+<h:form>
+
+
+
+<ul class="nav nav-tabs" style="width: 100%">
+
+<c:forEach items="#{menuHome.getMenuById(selectedMenuValues.lesson).theories}" var="theory" varStatus="index" begin="1" step="1">
+  <c:if test="#{index == 1}">
+  	<li class="active"><a href="#{fn:join('#tab',index)}" data-toggle="tab"><span class="glyphicon glyphicon-home"></span>#{theory.name}</a></li>
+  </c:if>
+  <c:if test="#{index != 1}">
+  	<li><a href="#{fn:join('#tab',index)}" data-toggle="tab"><span class="glyphicon glyphicon-home"></span>#{theory.name}</a></li>
+  </c:if>
+</c:forEach>
+
+</ul>
+
+<div class="tab-content">
+
+<c:forEach items="#{menuHome.getMenuById(selectedMenuValues.lesson).theories}" var="theory" varStatus="index" begin="1" step="1">
+
+
+<div class="tab-pane fade #{index == 1 ? 'in active' : ''}" id="#{fn:join('#tab',index)}">
+
+
+<c:if test="#{theory.size()>0}">
+<div class="container" style="margin-top: 10px;">
+<div class="row" >
+<c:forEach items="#{theory.vocabularies}" var="vocabulary">
+  <div class="col-sm-3" >
+    <div class="thumbnail" >
+      <h:graphicImage styleClass="img-thumbnail"  style="width: 150px;height: 150px" value="/images/dynamic/?file=#{vocabulary.picture}" rendered="#{not empty vocabulary.picture}"/>
+      <div class="caption">
+        <center>
+        <h4><strong>#{vocabulary.english}</strong></h4>
+        <p>#{vocabulary.polish}</p>
+        <h:commandButton styleClass="btn btn-success" action="#{sounds.play()}" value="Wymowa" />
+      	</center>
+      </div>
+    </div>
+  </div>
+</c:forEach>
+</div>
+</div>
+</c:if>
+
+<c:if test="#{theory.size()==0}">
+<ice:inputRichText language="pl" width="100%" height="100%"
+   saveOnSubmit="true" skin="silver" value="#{menuHome.getMenuById(selectedMenuValues.lesson).theories.}"/>
+</c:if>
+
+</div>
+</c:forEach>
+
+
+</div>
+
+</h:form>
+</f:subview>

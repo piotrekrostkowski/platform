@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:c="http://java.sun.com/jstl/core">
+	
+	
+<div class="container">
+<div class="row row-offcanvas row-offcanvas-right">
+<div class="col-xs-12 col-sm-9">
+ 
+
+   <h1 class="text-center">#{menuHome.getMenuById(selectedMenuValues.level).name}</h1>
+   <div class="row">
+   <c:forEach items="#{exercisesMenuList.resultList}" var="exercise"> 
+			<div class="col-xs-6">
+				<h2>#{exercise.name}</h2>
+				<p> mmDonec id elit non mi porta gravida at eget metus. Fusce
+					dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+					ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
+					magna mollis euismod. Donec sed odio dui.</p>
+				
+				
+				
+						<s:link includePageParams="true" styleClass="btn btn-default" view="/exercisesContent.xhtml"><span class="glyphicon glyphicon-home"></span>
+						#{exercise.name}
+
+						<f:param name="exercise" value="#{exercise.id}"/>
+						
+						</s:link>
+						
+					
+				
+				
+				
+			</div>
+</c:forEach>
+		</div>
+   
+   
+</div>
+</div>
+</div>
+
+</f:subview>
