@@ -7,7 +7,7 @@ import org.jboss.seam.annotations.Name;
 import org.jboss.seam.framework.EntityQuery;
 import java.util.Arrays;
 
-@Name("excercisesTypeList")
+@Name("exercisesTypeList")
 public class ExercisesTypeList extends EntityQuery<ExercisesType> {
 
 	private static final String EJBQL = "select exercisesType from ExercisesType exercisesType";

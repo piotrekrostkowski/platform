@@ -59,7 +59,7 @@
 	<h3>
 
     <c:choose>
-	<c:when test="#{exercise.excercisesType.component eq 'selectOneMenu'}">
+	<c:when test="#{exercise.exercisesType.component eq 'selectOneMenu'}">
 	
 	<c:set var="splittedQuestion" value="#{fn:split(exercise.questions.value, ' ')}" />
 	
@@ -82,7 +82,7 @@
 	 	</c:if>
 		</c:forEach> 
 	</c:when>
-	<c:when test="#{exercise.excercisesType.component eq 'selectOneRadio'}">
+	<c:when test="#{exercise.exercisesType.component eq 'selectOneRadio'}">
 	<h:outputText value="#{exercise.questions.value}" />
 	<br/>
 	

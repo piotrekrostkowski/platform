@@ -6,19 +6,18 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ice="http://www.icesoft.com/icefaces/component"
 	xmlns:s="http://jboss.com/products/seam/taglib"
-	xmlns:c="http://java.sun.com/jstl/core">
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 <h:form>
 
-
-
 <ul class="nav nav-tabs" style="width: 100%">
+<c:forEach items="#{menuHome.getMenuById(selectedMenuValues.content).theories}" var="theory" varStatus="status">
 
-<c:forEach items="#{menuHome.getMenuById(selectedMenuValues.lesson).theories}" var="theory" varStatus="index" begin="1" step="1">
-  <c:if test="#{index == 1}">
-  	<li class="active"><a href="#{fn:join('#tab',index)}" data-toggle="tab"><span class="glyphicon glyphicon-home"></span>#{theory.name}</a></li>
+  <c:if test="#{status.first}">
+  	<li class="active"><a href="#{fn:join('#tab',status.index)}" data-toggle="tab"><span class="glyphicon glyphicon-home"></span>#{theory.name}</a></li>
   </c:if>
-  <c:if test="#{index != 1}">
-  	<li><a href="#{fn:join('#tab',index)}" data-toggle="tab"><span class="glyphicon glyphicon-home"></span>#{theory.name}</a></li>
+  <c:if test="#{!status.first}">
+  	<li><a href="#{fn:join('#tab',status.index)}" data-toggle="tab"><span class="glyphicon glyphicon-home"></span>#{theory.name}</a></li>
   </c:if>
 </c:forEach>
 
@@ -26,13 +25,11 @@
 
 <div class="tab-content">
 
-<c:forEach items="#{menuHome.getMenuById(selectedMenuValues.lesson).theories}" var="theory" varStatus="index" begin="1" step="1">
+<c:forEach items="#{menuHome.getMenuById(selectedMenuValues.content).theories}" var="theory" varStatus="status">
 
+<div class="tab-pane fade #{status.first ? 'in active' : ''}" id="#{fn:join('tab',status.index)}" >
 
-<div class="tab-pane fade #{index == 1 ? 'in active' : ''}" id="#{fn:join('#tab',index)}">
-
-
-<c:if test="#{theory.size()>0}">
+<c:if test="#{theory.vocabularies.size()>0}">
 <div class="container" style="margin-top: 10px;">
 <div class="row" >
 <c:forEach items="#{theory.vocabularies}" var="vocabulary">
@@ -53,11 +50,21 @@
 </div>
 </c:if>
 
-<c:if test="#{theory.size()==0}">
-<ice:inputRichText language="pl" width="100%" height="100%"
-   saveOnSubmit="true" skin="silver" value="#{menuHome.getMenuById(selectedMenuValues.lesson).theories.}"/>
-</c:if>
+<c:if test="#{theory.vocabularies.size()==0}">
+<div class="container" style="margin-top: 10px;">
+<div class="row">
+<ice:inputRichText rendered="#{theoryEditController.editable}" saveOnSubmit="true"  language="pl" width="100%" height="600px" 
+   skin="silver" value="#{theory.value}" valueChangeListener="#{theoryHome.saveCustomTheory}">
+<f:attribute name="theory" value="#{theory}"/>
+</ice:inputRichText>
 
+<s:div rendered="#{!theoryEditController.editable}">#{theory.value}</s:div>
+
+<h:commandButton class="btn btn-default btn-lg" action="#{theoryEditController.changeEditable()}" value="Edit" />
+</div>
+</div>
+</c:if>
+ 
 </div>
 </c:forEach>
 

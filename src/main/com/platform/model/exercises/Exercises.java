@@ -81,7 +81,7 @@ public class Exercises implements java.io.Serializable {
 		return this.exercisesType;
 	}
 
-	public void setExcercisesType(ExercisesType exercisesType) {
+	public void setExercisesType(ExercisesType exercisesType) {
 		this.exercisesType = exercisesType;
 	}
 	@ManyToOne(fetch = FetchType.LAZY)

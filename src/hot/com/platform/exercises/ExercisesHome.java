@@ -47,9 +47,9 @@ public class ExercisesHome extends EntityHome<Exercises> {
 
 	public void wire() {
 		getInstance();
-		ExercisesType excercisesType = exercisesTypeHome.getDefinedInstance();
-		if (excercisesType != null) {
-			getInstance().setExcercisesType(excercisesType);
+		ExercisesType exercisesType = exercisesTypeHome.getDefinedInstance();
+		if (exercisesType != null) {
+			getInstance().setExercisesType(exercisesType);
 		}
 		Menu menu = menuHome.getDefinedInstance();
 		if (menu != null) {

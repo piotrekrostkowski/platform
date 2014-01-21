@@ -25,7 +25,7 @@ public class Theory {
 	
 	private Integer id;
 	private String name;
-	private Blob value;
+	private String value;
 	private Menu menu;
 	private Set<Vocabulary> vocabularies = new HashSet<Vocabulary>(0);
 	
@@ -34,7 +34,7 @@ public class Theory {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID",nullable=false,unique=true)
 	public Integer getId() {
 		return id;
@@ -45,11 +45,11 @@ public class Theory {
 	}
 
 	@Column(name="VALUE")
-	public Blob getValue() {
+	public String getValue() {
 		return value;
 	}
 
-	public void setValue(Blob value) {
+	public void setValue(String value) {
 		this.value = value;
 	}
 
@@ -62,7 +62,7 @@ public class Theory {
 	public void setMenu(Menu menu) {
 		this.menu = menu;
 	}
-	@Column(name="VALUE",length=100)
+	@Column(name="NAME",length=100)
 	public String getName() {
 		return name;
 	}

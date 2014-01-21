@@ -123,7 +123,7 @@ public class Menu implements java.io.Serializable {
 	
 
 
-
+	@OrderBy(value="id asc")
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="menu")
 	public Set<Theory> getTheories() {
 		return theories;
